@@ -1,0 +1,93 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title> new document </title>  
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>   
+    <script type="text/javascript"> 
+        var num = 3;
+        window.onload = function change(){
+            var tr = document.getElementsByTagName("tr");
+            for (var i =0;i<tr.length;i++){
+            tr[i].onmouseover = function (){
+                this.style.backgroundColor = "#f2f2f2";  
+            }
+            tr[i].onmouseout = function(){
+                this.style.backgroundColor = "";  
+            }
+            }       
+        };
+        function add()
+        {
+            var table = document.getElementById("table");
+            var tr = document.createElement("tr");
+            for (var  i =0;i<3;i++)
+            {
+                var th = document.createElement("th");
+                if (i == 0)
+                {
+                    var text = document.createTextNode("xh00"+num++);
+                    th.appendChild(text);
+                    th.style.textAlign = "left";
+                }
+                else if( i ==1) {
+                    var xing = ["孙","钱","赵","李","聂","吴","郑","王","袁","张"];
+                    var name1 = ["枝","小","浩","大","毅","嘉","博","江","聪"," "];
+                    var name2 = ["超","繁","汕","良","明","杰","鑫","宏","婷","四"];
+                    var num1 = Math.floor(Math.random()*10);
+                    var num2 = Math.floor(Math.random()*10);
+                    var num3 = Math.floor(Math.random()*10);
+                    var name = document.createTextNode(xing[num1]+name1[num2]+name2[num3]);
+                    th.appendChild(name);
+                    th.style.textAlign = "left";
+                }
+                else if (i ==2)
+                {
+                    var a = document.createElement("a");
+                    a.href = "javascript:dele()"
+                    a.innerHTML = "删除";
+                    th.appendChild(a);
+                    th.style.textAlign = "left";
+                }
+                tr.appendChild(th);
+            }
+            table.appendChild(tr);
+            window.onload();
+        };
+            function dele(){
+                var a = document.getElementsByTagName("a");
+                for (var i=0;i<a.length;i++)
+                {
+                    a[i].onclick = function (){
+                        var grand = this.parentNode.parentNode.parentNode;
+                        var Parent = this.parentNode.parentNode;
+                        grand.removeChild(Parent);
+                    }
+                }
+            }
+
+    </script> 
+    </head> 
+    <body> 
+        <table border="1" width="50%" id="table">
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>操作</th>
+        </tr>  
+
+        <tr>
+            <td>xh001</td>
+            <td>王小明</td>
+            <td><a href="javascript:;" >删除</a></td> 
+        </tr>
+
+        <tr>
+            <td>xh002</td>
+            <td>刘小芳</td>
+            <td><a href="javascript:dele();" >删除</a></td>  
+        </tr>  
+
+        </table>
+        <input type="button" value="添加一行" onclick = "add()" /> 
+    </body>
+    </html>
